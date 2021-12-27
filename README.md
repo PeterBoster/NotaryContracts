@@ -1,0 +1,2 @@
+# Notary Contracts
+Smart contract "notary" using ERC721s for proposed documents(Proposals), ERC20s for Notary Licensing(NotaryLicense), a Notary contract(Public Notary), and ERC721s for notarized documents(OfficialDocuments)
