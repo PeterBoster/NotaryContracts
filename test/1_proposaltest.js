@@ -4,7 +4,7 @@ const Proposals = artifacts.require('Proposals.sol')
 
 let proposals
 
-contract("Proposals", async () => {
+contract("Proposals", async (accounts) => {
     describe("Proposals Deployed", async () => {
         it("Proposal Contract Has Name and Symbol", async () => {
             proposals = await Proposals.new()
@@ -18,13 +18,13 @@ contract("Proposals", async () => {
     })
     describe("Successful Mint", async () => {
         it("Mint Successfully Fetches Proposal Details and Owner", async () => {
-            const mint = await proposals.mint("Title transfer", "Transfers title from me to you")
+            const mint = await proposals.mint("Title transfer", "Transfers title from me to you", {from: accounts[1]})
 
             const supply = await proposals.getSupply()
             assert.equal(supply, 1)
 
             const owner = await proposals.ownerOf(1)
-            assert.equal(owner, "0x627306090abaB3A6e1400e9345bC60c78a8BEf57")
+            assert.equal(owner, accounts[1])
 
             const title = await proposals.getProposalTitle(1)
             assert.equal(title, "Title transfer")
